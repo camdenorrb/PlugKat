@@ -9,9 +9,10 @@ import me.camdenorrb.plugkat.struct.pluginManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabExecutor
 
 
-class DisablePluginCmd : CommandExecutor {
+class DisablePluginCmd : CommandExecutor, TabExecutor {
 
 	override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
 
@@ -26,6 +27,10 @@ class DisablePluginCmd : CommandExecutor {
 		sender.sendMessage("${DARK_GREEN}The plugin $GREEN${plugin.name} ${DARK_GREEN}has been disabled!")
 
 		return true
+	}
+
+	override fun onTabComplete(sender: CommandSender, cmd: Command, label: String, args: Array<String>): List<String> {
+		return pluginManager.plugins.filter { it.isEnabled }.map { it.name }
 	}
 
 }

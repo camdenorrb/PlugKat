@@ -8,7 +8,7 @@ main: me.camdenorrb.plugkat.PlugKat
 commands:
 
   loadplugin:
-    usage: "§4Usage: §c/loadPlugin <Plugin Name>"
+    usage: "§4Usage: §c/loadPlugin <Plugin File Name>"
     permission: "plugkat.loadplugin"
     description: "Loads the specified plugin."
     permission-message: "§4Permission: §c<permission> §4is required."

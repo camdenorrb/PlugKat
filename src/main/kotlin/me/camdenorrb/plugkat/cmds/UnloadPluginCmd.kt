@@ -4,14 +4,16 @@ import me.camdenorrb.katlibraries.struct.DARK_GREEN
 import me.camdenorrb.katlibraries.struct.DARK_RED
 import me.camdenorrb.katlibraries.struct.GREEN
 import me.camdenorrb.katlibraries.struct.RED
+import me.camdenorrb.plugkat.ext.disable
 import me.camdenorrb.plugkat.ext.unload
 import me.camdenorrb.plugkat.struct.pluginManager
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabExecutor
 
 
-class UnloadPluginCmd : CommandExecutor {
+class UnloadPluginCmd : CommandExecutor, TabExecutor {
 
 	override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
 
@@ -26,10 +28,16 @@ class UnloadPluginCmd : CommandExecutor {
 		}
 
 
+		if (plugin.isEnabled) plugin.disable()
+
 		plugin.unload()
 		sender.sendMessage("${DARK_GREEN}The plugin $GREEN${plugin.name} ${DARK_GREEN}has been unloaded!")
 
 		return true
+	}
+
+	override fun onTabComplete(sender: CommandSender, cmd: Command, label: String, args: Array<String>): List<String> {
+		return pluginManager.plugins.map { it.name }
 	}
 
 }
