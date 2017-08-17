@@ -1,1 +1,1 @@
-Depends: [ KatLibraries ]
+Depends: [ [KatLibraries](https://www.spigotmc.org/resources/katlibraries.45837/) ]
