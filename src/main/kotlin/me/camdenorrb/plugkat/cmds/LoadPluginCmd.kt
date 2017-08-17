@@ -6,12 +6,14 @@ import me.camdenorrb.katlibraries.struct.GREEN
 import me.camdenorrb.katlibraries.struct.RED
 import me.camdenorrb.plugkat.ext.loadPluginByName
 import me.camdenorrb.plugkat.struct.pluginManager
+import me.camdenorrb.plugkat.struct.pluginsFolder
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabCompleter
 
 
-class LoadPluginCmd : CommandExecutor {
+class LoadPluginCmd : CommandExecutor, TabCompleter {
 
 	override fun onCommand(sender: CommandSender, cmd: Command, label: String, args: Array<String>): Boolean {
 
@@ -25,11 +27,15 @@ class LoadPluginCmd : CommandExecutor {
 			return true
 		}
 
-
 		val plugin = loadPluginByName(name) ?: return false
 		sender.sendMessage("${DARK_GREEN}The plugin $GREEN${plugin.name} ${DARK_GREEN}has been loaded!")
 
 		return true
+	}
+
+
+	override fun onTabComplete(sender: CommandSender, cmd: Command, label: String, args: Array<String>): List<String> {
+		return pluginsFolder.list().filter { it.endsWith(".jar") }.map { it.removeSuffix(".jar") }
 	}
 
 }

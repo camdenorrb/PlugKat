@@ -1,5 +1,5 @@
 name: PlugKat
-version: Kat1.0.0
+version: Kat1.0.1
 author: MrKitty_Cat
 depends: [KatLibraries]
 main: me.camdenorrb.plugkat.PlugKat
@@ -29,4 +29,10 @@ commands:
     usage: "§4Usage: §c/disablePlugin <Plugin Name>"
     permission: "plugkat.disableplugin"
     description: "Disables the specified plugin."
+    permission-message: "§4Permission §c<permission> §4is required"
+
+  reloadplugin:
+    usage: "§4Usage: §c/reloadPlugin <Plugin Name>"
+    permission: "plugkat.reloadplugin"
+    description: "Reloads the specified plugin."
     permission-message: "§4Permission §c<permission> §4is required"

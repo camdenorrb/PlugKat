@@ -27,6 +27,11 @@ class UnloadPluginCmd : CommandExecutor, TabExecutor {
 			return true
 		}
 
+		if (plugin.name.let { it == "PlugKat" || it == "KatLibraries" }) {
+			sender.sendMessage("${RED}You cannot unload this plugin!")
+			return true
+		}
+
 
 		if (plugin.isEnabled) plugin.disable()
 
