@@ -1,0 +1,32 @@
+name: PlugKat
+version: Kat1.0.0
+author: MrKitty_Cat
+depends: [KatLibraries]
+main: me.camdenorrb.plugkat.PlugKat
+
+
+commands:
+
+  loadplugin:
+    usage: "§4Usage: §c/loadPlugin <Plugin Name>"
+    permission: "plugkat.loadplugin"
+    description: "Loads the specified plugin."
+    permission-message: "§4Permission: §c<permission> §4is required."
+
+  unloadplugin:
+    usage: "§4Usage: §c/unloadPlugin <Plugin Name>"
+    permission: "plugkat.unloadplugin"
+    description: "Unloads the specified plugin."
+    permission-message: "§4Permission: §c<permission> §4is required."
+
+  enableplugin:
+    usage: "§4Usage: §c/enablePlugin <Plugin Name>"
+    permission: "plugkat.enableplugin"
+    description: "Enables the specified plugin."
+    permission-message: "§4Permission: §c<permission> §4is required."
+
+  disableplugin:
+    usage: "§4Usage: §c/disablePlugin <Plugin Name>"
+    permission: "plugkat.disableplugin"
+    description: "Disables the specified plugin."
+    permission-message: "§4Permission: §c<permission> §4is required"

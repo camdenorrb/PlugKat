@@ -1,0 +1,47 @@
+group 'me.camdenorrb'
+version '1.0.0'
+
+buildscript {
+
+    ext {
+	    shadowVersion = '2.0.1'
+	    kotlinVersion = '1.1.4'
+	    minibusVersion = '1.0.9'
+	    katLibsVersion = '1.0.2'
+	    spigotVersion = '1.12-R0.1-SNAPSHOT'
+    }
+
+    repositories {
+	    jcenter()
+	    mavenCentral()
+    }
+
+    dependencies {
+	    classpath "com.github.jengelman.gradle.plugins:shadow:$shadowVersion"
+	    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
+
+defaultTasks 'clean', 'shadowJar'
+
+repositories {
+	jcenter()
+	mavenLocal()
+	mavenCentral()
+}
+
+dependencies {
+	compileOnly "org.spigotmc:spigot:$spigotVersion"
+	compileOnly "org.bukkit:craftbukkit:$spigotVersion"
+	compileOnly "me.camdenorrb:MiniBus:$minibusVersion"
+	compileOnly "me.camdenorrb:KatLibraries:$katLibsVersion"
+	compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
+}
+
+compileKotlin { kotlinOptions.jvmTarget = "1.8" }
+
+compileTestKotlin { kotlinOptions.jvmTarget = "1.8" }
