@@ -4,6 +4,7 @@ import me.camdenorrb.katlibraries.struct.DARK_GREEN
 import me.camdenorrb.katlibraries.struct.DARK_RED
 import me.camdenorrb.katlibraries.struct.GREEN
 import me.camdenorrb.katlibraries.struct.RED
+import me.camdenorrb.plugkat.ext.file
 import me.camdenorrb.plugkat.ext.loadPluginByName
 import me.camdenorrb.plugkat.struct.pluginManager
 import me.camdenorrb.plugkat.struct.pluginsFolder
@@ -19,7 +20,7 @@ class LoadPluginCmd : CommandExecutor, TabCompleter {
 
 		val name = args.firstOrNull() ?: return false
 
-		val foundPlugin = pluginManager.getPlugin(name)
+		val foundPlugin = pluginManager.plugins.find { it.file().nameWithoutExtension == name }
 
 
 		if (foundPlugin != null) {

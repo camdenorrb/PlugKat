@@ -22,9 +22,9 @@ fun Plugin.enable() = pluginManager.enablePlugin(this)
 fun Plugin.disable() = pluginManager.disablePlugin(this)
 
 
-fun File.loadPlugin(): Plugin? = pluginManager.loadPlugin(this).apply { onLoad() }
+fun Plugin.file() = JavaPlugin::class.java.getPrivateVar<File>("file", this)
 
-fun Plugin.file(block: (File) -> Unit) = JavaPlugin::class.java.getPrivateVar<File>("file", this) { block(it) }
+fun File.loadPlugin(): Plugin? = pluginManager.loadPlugin(this).apply { onLoad() }
 
 
 fun loadPluginByName(name: String): Plugin? = pluginsFolder.resolve("$name.jar").takeIf { it.exists() }?.loadPlugin()
@@ -32,18 +32,12 @@ fun loadPluginByName(name: String): Plugin? = pluginsFolder.resolve("$name.jar")
 
 fun Plugin.unload() {
 
-	managerClazz.getPrivateVar<ArrayList<Plugin>>("plugins", pluginManager) { it.remove(this) }
+	managerClazz.getPrivateVar<ArrayList<Plugin>>("plugins", pluginManager).remove(this)
+	managerClazz.getPrivateVar<MutableMap<String, Plugin>>("lookupNames", pluginManager).remove(this.name)
 
-	managerClazz.getPrivateVar<SimpleCommandMap>("commandMap", pluginManager) { commandMap ->
+	val commandMap = managerClazz.getPrivateVar<SimpleCommandMap>("commandMap", pluginManager)
+	val knownCmds = commandMap.javaClass.getPrivateVar<MutableMap<String, Command>>("knownCommands", commandMap)
 
-		managerClazz.getPrivateVar<MutableMap<String, Plugin>>("lookupNames", pluginManager) {
-			it.remove(this.name)
-		}
-
-		commandMap.javaClass.getPrivateVar<MutableMap<String, Command>>("knownCommands", commandMap) {
-			it.values.removeIf { it is PluginCommand && it.plugin == this && it.unregister(commandMap) }
-		}
-
-	}
-
+	knownCmds.values.removeIf { it is PluginCommand && it.plugin == this && it.unregister(commandMap) }
 }
+

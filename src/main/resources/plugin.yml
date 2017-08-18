@@ -1,7 +1,7 @@
 name: PlugKat
-version: Kat1.0.1
+version: Kat1.0.3
 author: MrKitty_Cat
-depends: [KatLibraries]
+depend: [KatLibraries]
 main: me.camdenorrb.plugkat.PlugKat
 
 
