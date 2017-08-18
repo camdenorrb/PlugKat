@@ -12,9 +12,10 @@ import org.bukkit.plugin.PluginManager
 import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.util.*
+import kotlin.reflect.KClass
 
 
-private val managerClazz: Class<out PluginManager> by lazy { pluginManager.javaClass }
+private val managerClazz: KClass<out PluginManager> by lazy { pluginManager::class }
 
 
 fun Plugin.enable() = pluginManager.enablePlugin(this)
@@ -22,7 +23,7 @@ fun Plugin.enable() = pluginManager.enablePlugin(this)
 fun Plugin.disable() = pluginManager.disablePlugin(this)
 
 
-fun Plugin.file() = JavaPlugin::class.java.getPrivateVar<File>("file", this)
+fun Plugin.file() = JavaPlugin::class.getPrivateVar<File>("file", this)
 
 fun File.loadPlugin(): Plugin? = pluginManager.loadPlugin(this).apply { onLoad() }
 
@@ -36,7 +37,7 @@ fun Plugin.unload() {
 	managerClazz.getPrivateVar<MutableMap<String, Plugin>>("lookupNames", pluginManager).remove(this.name)
 
 	val commandMap = managerClazz.getPrivateVar<SimpleCommandMap>("commandMap", pluginManager)
-	val knownCmds = commandMap.javaClass.getPrivateVar<MutableMap<String, Command>>("knownCommands", commandMap)
+	val knownCmds = commandMap::class.getPrivateVar<MutableMap<String, Command>>("knownCommands", commandMap)
 
 	knownCmds.values.removeIf { it is PluginCommand && it.plugin == this && it.unregister(commandMap) }
 }

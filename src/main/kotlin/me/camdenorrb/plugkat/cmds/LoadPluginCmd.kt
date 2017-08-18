@@ -4,6 +4,7 @@ import me.camdenorrb.katlibraries.struct.DARK_GREEN
 import me.camdenorrb.katlibraries.struct.DARK_RED
 import me.camdenorrb.katlibraries.struct.GREEN
 import me.camdenorrb.katlibraries.struct.RED
+import me.camdenorrb.plugkat.ext.enable
 import me.camdenorrb.plugkat.ext.file
 import me.camdenorrb.plugkat.ext.loadPluginByName
 import me.camdenorrb.plugkat.struct.pluginManager
@@ -28,7 +29,7 @@ class LoadPluginCmd : CommandExecutor, TabCompleter {
 			return true
 		}
 
-		val plugin = loadPluginByName(name) ?: return false
+		val plugin = loadPluginByName(name)?.apply { enable() } ?: return false
 		sender.sendMessage("${DARK_GREEN}The plugin $GREEN${plugin.name} ${DARK_GREEN}has been loaded!")
 
 		return true

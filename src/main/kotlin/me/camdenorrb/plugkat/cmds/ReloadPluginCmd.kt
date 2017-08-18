@@ -23,7 +23,9 @@ class ReloadPluginCmd : CommandExecutor, TabExecutor {
 			return true
 		}
 
-		plugin.apply { disable(); unload() }
+		if (plugin.isEnabled) plugin.disable()
+
+		plugin.unload()
 		plugin.file().loadPlugin()?.enable()
 
 		sender.sendMessage("${DARK_GREEN}The plugin $GREEN${plugin.name} ${DARK_GREEN}has been reloaded!")

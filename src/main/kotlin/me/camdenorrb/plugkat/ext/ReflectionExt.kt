@@ -2,17 +2,16 @@
 
 package me.camdenorrb.plugkat.ext
 
-import java.lang.reflect.Field
+import kotlin.reflect.KClass
+import kotlin.reflect.KProperty1
+import kotlin.reflect.full.memberProperties
+import kotlin.reflect.jvm.isAccessible
 
 
-fun Class<out Any>.getPrivateField(name: String): Field {
-
-	val field = getDeclaredField(name)
+fun <T : Any> KClass<out T>.getPrivateProp(name: String): KProperty1<out T, Any?> {
+	val field = memberProperties.find { it.name == name } ?: error("Private field not found \"$name\"")
 	if (field.isAccessible.not()) field.isAccessible = true
-
 	return field
 }
 
-fun <R : Any> Class<out Any>.getPrivateVar(name: String, reference: Any): R {
-	return getPrivateField(name).get(reference) as R
-}
+fun <R : Any> KClass<out Any>.getPrivateVar(name: String, reference: Any) = getPrivateProp(name).call(reference) as R
