@@ -2,7 +2,7 @@
 
 package me.camdenorrb.plugkat.ext
 
-import me.camdenorrb.plugkat.struct.pluginManager
+import me.camdenorrb.kspigotbasics.struct.pluginManager
 import me.camdenorrb.plugkat.struct.pluginsFolder
 import org.bukkit.command.Command
 import org.bukkit.command.PluginCommand
@@ -13,6 +13,8 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.util.*
 import kotlin.reflect.KClass
+
+
 
 
 private val managerClazz: KClass<out PluginManager> by lazy { pluginManager::class }

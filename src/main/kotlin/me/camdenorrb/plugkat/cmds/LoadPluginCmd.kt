@@ -1,13 +1,9 @@
 package me.camdenorrb.plugkat.cmds
 
-import me.camdenorrb.katlibraries.struct.DARK_GREEN
-import me.camdenorrb.katlibraries.struct.DARK_RED
-import me.camdenorrb.katlibraries.struct.GREEN
-import me.camdenorrb.katlibraries.struct.RED
+import me.camdenorrb.kspigotbasics.struct.*
 import me.camdenorrb.plugkat.ext.enable
 import me.camdenorrb.plugkat.ext.file
 import me.camdenorrb.plugkat.ext.loadPluginByName
-import me.camdenorrb.plugkat.struct.pluginManager
 import me.camdenorrb.plugkat.struct.pluginsFolder
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

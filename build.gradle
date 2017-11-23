@@ -5,15 +5,15 @@ buildscript {
 
     ext {
 	    shadowVersion = '2.0.1'
-	    kotlinVersion = '1.1.4'
-	    minibusVersion = '1.0.9'
-	    katLibsVersion = '1.0.2'
-	    spigotVersion = '1.12-R0.1-SNAPSHOT'
+	    minibusVersion = '1.2.3'
+	    kotlinVersion = '1.2.0-rc-39'
+	    spigotBasicsVersion = '1.0.1'
+	    spigotVersion = '1.12.2-R0.1-SNAPSHOT'
     }
 
     repositories {
 	    jcenter()
-	    mavenCentral()
+	    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     }
 
     dependencies {
@@ -29,16 +29,19 @@ apply plugin: 'com.github.johnrengelman.shadow'
 defaultTasks 'clean', 'shadowJar'
 
 repositories {
+
 	jcenter()
 	mavenLocal()
 	mavenCentral()
+
+	maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
 }
 
 dependencies {
 	compileOnly "org.spigotmc:spigot:$spigotVersion"
 	compileOnly "org.bukkit:craftbukkit:$spigotVersion"
 	compileOnly "me.camdenorrb:MiniBus:$minibusVersion"
-	compileOnly "me.camdenorrb:KatLibraries:$katLibsVersion"
+	compileOnly "me.camdenorrb:KSpigotBasics:$spigotBasicsVersion"
 	compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jre8:$kotlinVersion"
 }
 
