@@ -27,7 +27,7 @@ fun Plugin.disable() = pluginManager.disablePlugin(this)
 
 fun Plugin.file() = JavaPlugin::class.getPrivateVar<File>("file", this)
 
-fun File.loadPlugin(): Plugin? = pluginManager.loadPlugin(this).apply { onLoad() }
+fun File.loadPlugin(): Plugin? = pluginManager.loadPlugin(this)!!.apply { onLoad() }
 
 
 fun loadPluginByName(name: String): Plugin? = pluginsFolder.resolve("$name.jar").takeIf { it.exists() }?.loadPlugin()
