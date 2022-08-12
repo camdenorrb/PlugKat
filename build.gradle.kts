@@ -16,7 +16,7 @@ repositories {
 dependencies {
 	compileOnly(kotlin("stdlib-jdk8"))
 	compileOnly(kotlin("reflect"))
-	compileOnly("org.spigotmc:spigot-api:1.19-R0.1-SNAPSHOT")
+	compileOnly("org.spigotmc:spigot-api:1.19.2-R0.1-SNAPSHOT")
 	compileOnly("me.camdenorrb:MiniBus:1.4.0")
 	compileOnly("me.camdenorrb:KSpigotBasics:1.1.0")
 }
